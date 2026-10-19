@@ -1,0 +1,339 @@
+/* ==============================
+   1. GLOBAL RESET
+================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+html {
+  background-color: #edf3e9;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #243629;
+  line-height: 1.6;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(181, 213, 163, 0.45),
+      transparent 40%
+    ),
+    linear-gradient(135deg, #edf3e9 0%, #dce9d5 100%);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background-color: #b9e4b3;
+  color: #193b26;
+}
+
+/* ==============================
+   2. CREATE NOTE FORM
+================================= */
+
+.note-create-form {
+  width: min(500px, calc(100% - 2rem));
+  margin: 2.5rem auto;
+  padding: clamp(1.25rem, 4vw, 2rem);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 1.25rem;
+
+  box-shadow:
+    0 10px 30px rgba(39, 66, 43, 0.09),
+    0 2px 6px rgba(39, 66, 43, 0.04);
+
+  backdrop-filter: blur(12px);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.note-create-form:hover {
+  box-shadow:
+    0 16px 40px rgba(39, 66, 43, 0.13),
+    0 3px 8px rgba(39, 66, 43, 0.05);
+}
+
+/* ==============================
+   3. INPUT FIELDS
+================================= */
+
+.note-create-form input,
+.note-create-form textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+
+  color: #243629;
+  background-color: #f8faf7;
+
+  border: 1px solid #dce6d7;
+  border-radius: 0.75rem;
+  outline: none;
+
+  font-size: 1rem;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.note-create-form input {
+  min-height: 3.2rem;
+}
+
+.note-create-form textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.note-create-form input::placeholder,
+.note-create-form textarea::placeholder {
+  color: #8a978a;
+}
+
+.note-create-form input:hover,
+.note-create-form textarea:hover {
+  border-color: #b5c9ad;
+}
+
+.note-create-form input:focus,
+.note-create-form textarea:focus {
+  background-color: #ffffff;
+  border-color: #43885a;
+
+  box-shadow: 0 0 0 4px rgba(67, 136, 90, 0.13);
+}
+
+/* ==============================
+   4. CREATE NOTE BUTTON
+================================= */
+
+.note-create-form button {
+  width: 100%;
+  min-height: 3.2rem;
+  padding: 0.8rem 1rem;
+
+  color: #ffffff;
+  background: linear-gradient(135deg, #367b4b, #1d6339);
+
+  border: none;
+  border-radius: 0.75rem;
+
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 12px rgba(37, 104, 57, 0.18);
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+}
+
+.note-create-form button:hover {
+  background: linear-gradient(135deg, #286b3e, #164d2b);
+  box-shadow: 0 8px 18px rgba(37, 104, 57, 0.25);
+  transform: translateY(-2px);
+}
+
+.note-create-form button:active {
+  transform: scale(0.98);
+}
+
+/* ==============================
+   5. NOTES CONTAINER
+================================= */
+
+.notes {
+  width: 100%;
+  max-width: 1300px;
+
+  margin: 0 auto;
+  padding: 1rem clamp(1rem, 4vw, 3rem) 3rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1.25rem;
+}
+
+/* ==============================
+   6. INDIVIDUAL NOTE CARDS
+================================= */
+
+.note {
+  width: min(100%, 20rem);
+  max-width: 20rem;
+  flex: 0 1 20rem;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  padding: 1.25rem;
+
+  background: linear-gradient(145deg, #fffaf0 0%, #f7ead5 100%);
+
+  border: 1px solid rgba(142, 117, 78, 0.13);
+  border-radius: 1rem;
+
+  box-shadow:
+    0 5px 15px rgba(65, 66, 41, 0.07),
+    0 1px 3px rgba(65, 66, 41, 0.04);
+
+  overflow-wrap: anywhere;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.note:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(74, 126, 78, 0.35);
+
+  box-shadow:
+    0 14px 28px rgba(45, 67, 43, 0.12),
+    0 4px 8px rgba(45, 67, 43, 0.05);
+}
+
+/* Note headings */
+
+.note h1,
+.note h2,
+.note h3 {
+  color: #304c35;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+/* Note descriptions */
+
+.note p {
+  color: #596454;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ==============================
+   7. NOTE ACTION BUTTONS
+================================= */
+
+.note button {
+  margin: 0.25rem 0.25rem 0 0;
+  padding: 0.65rem 0.9rem;
+
+  color: #315b3a;
+  background-color: #ffffff;
+
+  border: 1px solid #d5e2cf;
+  border-radius: 0.65rem;
+
+  font-size: 0.9rem;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.note button:hover {
+  color: #ffffff;
+  background-color: #367b4b;
+  border-color: #367b4b;
+  transform: translateY(-1px);
+}
+
+.note button:active {
+  transform: scale(0.97);
+}
+
+/* ==============================
+   8. ACCESSIBILITY
+================================= */
+
+button:focus-visible {
+  outline: 3px solid #77a985;
+  outline-offset: 3px;
+}
+
+.note-create-form button:disabled,
+.note button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ==============================
+   9. RESPONSIVE DESIGN
+================================= */
+
+@media (max-width: 600px) {
+  .note-create-form {
+    margin: 1.5rem auto;
+  }
+
+  .notes {
+    padding: 0.5rem 1rem 2rem;
+    gap: 1rem;
+  }
+
+  .note {
+    width: 100%;
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
